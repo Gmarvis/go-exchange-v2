@@ -1,0 +1,25 @@
+.popup {
+  display: flex;
+  background-color: #f8f2f2;
+  width: 40%;
+  max-width: 97vw;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  height: 20rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.closeBtn {
+  color: #020d14;
+  font-size: 1.5rem;
+  right: 0;
+  position: absolute;
+}
+
+@media screen and (max-width: 770px) {
+  .popup {
+    width: 90%;
+  }
+}
