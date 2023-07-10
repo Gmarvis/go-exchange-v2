@@ -8,8 +8,10 @@ import { CurrencyContext } from "./utils/context";
 // import { Navbar } from "./components/nav/navbar";
 import Navbar from "./components/nav/navbar";
 
+// const baseUrl = "https://api.currencyapi.com/v3/latest?apikey=yxwOCSE37Lu64dfvxhbaSrh8SduHenuI2FFeBArJ";
+
 const baseUrl =
-  "https://api.currencyapi.com/v3/latest?apikey=yxwOCSE37Lu64dfvxhbaSrh8SduHenuI2FFeBArJ";
+  "https://api.currencyapi.com/v3/latest?apikey=wm4xHyrV22ukG8i7AewRIN6Fpke3yCDwxwaLbQel";
 
 function App() {
   const [currencies, setCurrencies] = useState(null);
