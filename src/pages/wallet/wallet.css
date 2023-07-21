@@ -46,7 +46,7 @@ option {
 }
 
 .wallet {
-  background-color: #ffffff1e;
+  /* background-color: #ffffff1e; */
   height: 80vh;
   /* margin: 4rem 0; */
   padding: 10px;
@@ -91,7 +91,7 @@ option {
 .walletCards {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #fff;
+  border: 1px solid #041a14;
   width: fit-content;
   padding: 10px;
 }
@@ -111,6 +111,11 @@ option {
 
 .funds {
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: flex-end;
+  height: 100%;
 }
 
 .funds button {
@@ -118,6 +123,7 @@ option {
   gap: 10px;
   align-content: center;
   justify-content: center;
+  align-self: flex-end;
   height: 30px;
   margin-top: auto;
   margin-left: 40px;

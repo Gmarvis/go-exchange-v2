@@ -5,6 +5,7 @@ import { DepositForm } from "../../components/handleExchange/deposit";
 import { PopUp } from "../../components/popups/popUp";
 import { FundsDeposit } from "../../components/cards";
 import { getLocalStorage } from "../../service/tools";
+import CurrencyConverter from "../../components/conveter/conveter";
 
 export const Wallet = (props) => {
   const { baseCurrency } = useContext(CurrencyContext);
@@ -25,7 +26,7 @@ export const Wallet = (props) => {
       if (cur.code === selected) {
         return cur?.value;
       }
-      // return cur?.value;
+      return cur?.value;
     });
     valTo = valTo?.value;
 
@@ -53,6 +54,7 @@ export const Wallet = (props) => {
       results += amount / map[`${currencyType}`];
     });
     let total = results / valTo + amountTo;
+    // total = total.toFixed(2);
     if (total) setTotalFunds(total);
   };
   React.useEffect(() => {
@@ -60,45 +62,48 @@ export const Wallet = (props) => {
   });
 
   return (
-    <div className="wallet">
-      <div className="walletContainer">
-        <div className="header">
-          <button onClick={() => setShowPopUp(true)} className="depositeBtn">
-            Deposit
-          </button>
+    <>
+      <div className="wallet">
+        <div className="walletContainer">
+          <div className="header">
+            <button onClick={() => setShowPopUp(true)} className="depositeBtn">
+              Deposit
+            </button>
 
-          <PopUp trigger={showPopUp} setTrigger={setShowPopUp}>
-            <DepositForm setShowPopUp={setShowPopUp} />
-          </PopUp>
-          <div className="balance">
-            <span>
-              {totalFunds} {selected}
-            </span>
-          </div>
+            <PopUp trigger={showPopUp} setTrigger={setShowPopUp}>
+              <DepositForm setShowPopUp={setShowPopUp} />
+            </PopUp>
+            <div className="balance">
+              <span>
+                {totalFunds} {selected}
+              </span>
+            </div>
 
-          <div className="selectCurrency">
-            <label htmlFor="currency">
-              {/* select currency */}
-              <select
-                name="selectedCurrency"
-                value={selected}
-                onChange={handleSelect}
-              >
-                {baseCurrency.map((currency) => (
-                  <option className="optionIterms" value={baseCurrency.code}>
-                    {currency.code}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="selectCurrency">
+              <label htmlFor="currency">
+                {/* select currency */}
+                <select
+                  name="selectedCurrency"
+                  value={selected}
+                  onChange={handleSelect}
+                >
+                  {baseCurrency.map((currency) => (
+                    <option className="optionIterms" value={baseCurrency.code}>
+                      {currency.code}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="exchangeSection">
-        <h2 className="text-center">wallet Name: {walletName}</h2>
-        <FundsDeposit />
+        <div className="exchangeSection">
+          <h2 className="text-center">wallet Name: {walletName}</h2>
+          <FundsDeposit />
+        </div>
+        <CurrencyConverter />
       </div>
-    </div>
+    </>
   );
 };

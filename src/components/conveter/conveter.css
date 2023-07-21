@@ -1,0 +1,33 @@
+.currencyConverter {
+  width: 60vw;
+  margin: 50px auto;
+  text-align: center;
+  right: 50;
+  bottom: 0;
+}
+
+.currencyConverter h1 {
+  text-align: center;
+}
+
+.equal {
+  text-align: center;
+}
+
+.currencyRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currencyRow input {
+  width: 160px;
+  outline: none;
+  height: 30px;
+  color: black;
+}
+
+.currencyRow select {
+  width: 50px;
+  margin-left: 0.5rem;
+}

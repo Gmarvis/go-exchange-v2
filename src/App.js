@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div>
-      <CurrencyContext.Provider value={{ baseCurrency }}>
+      <CurrencyContext.Provider value={{ currencies, baseCurrency }}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

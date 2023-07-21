@@ -9,7 +9,7 @@ export const FundsDeposit = () => {
   const { baseCurrency } = useContext(CurrencyContext);
   const [showPopUp, setShowPopUp] = useState(false);
   const [popupdata, setPopupData] = useState();
-
+  const [slotAmount, setSlotAmount] = useState();
   const [convert, setConvert] = useState({
     amount: 0,
     currencyType: "USD",
@@ -32,7 +32,10 @@ export const FundsDeposit = () => {
 
   // get deposited funds from local statorage
 
+  /* ---------converion logic starts here--------- */
   const convertAmmount = (OjbFrom, ObjTo) => {
+    setSlotAmount(OjbFrom.amount);
+
     const rateF = baseCurrency.find(
       (currObj) => currObj.code === OjbFrom.currencyType
     ).value;
@@ -41,13 +44,30 @@ export const FundsDeposit = () => {
       (currObj) => currObj.code === ObjTo.currencyType
     ).value;
 
-    const result = (convert.amount / rateF) * rateTo;
+    let result;
 
-    return result;
+    result = (convert.amount / rateF) * rateTo;
+
+    // const result = convert.amount * rateTo;
+
+    return result.toFixed(3);
   };
+
+  /* ----------------convertion logic ends here----------------- */
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (convert.amount > popupdata.amount) {
+      alert("Bad transaction out of funds...!");
+      setShowPopUp(false);
+      return;
+    }
+
+    if (convert.currencyType === popupdata.currencyType) {
+      alert("Can't transfer to the same wallet");
+      return;
+    }
 
     const holder = walletFunds.map((curr) => {
       if (curr.currencyType === popupdata.currencyType) {
@@ -62,7 +82,6 @@ export const FundsDeposit = () => {
     });
     updateLocalStorage("amountDeposit", holder);
     setShowPopUp(false);
-    // navigate("/wallet");
   };
 
   return (
@@ -77,7 +96,7 @@ export const FundsDeposit = () => {
               <h3>
                 {funds?.amount} {funds?.currencyType}
               </h3>
-              <button onClick={() => handleClick(funds)}>convert</button>
+              <button onClick={() => handleClick(funds)}>Transfer</button>
             </div>
           </div>
         ))}
@@ -92,7 +111,7 @@ export const FundsDeposit = () => {
             <div className="login">
               <form action="submit" onSubmit={handleSubmit}>
                 <label>
-                  Convert {popupdata?.currencyType}
+                  Transfer {popupdata?.currencyType}
                   <input
                     type="number"
                     name="amount"

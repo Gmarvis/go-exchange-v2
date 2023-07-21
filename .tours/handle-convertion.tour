@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "handle convertion",
+  "steps": [
+    {
+      "file": "src/components/cards.jsx",
+      "description": "here i had to optimize my the currency convertion logic to make it work pefectly",
+      "line": 35
+    }
+  ],
+  "ref": "feacture/responsive-nav"
+}
