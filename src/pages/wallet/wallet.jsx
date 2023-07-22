@@ -87,7 +87,7 @@ export const Wallet = (props) => {
                   value={selected}
                   onChange={handleSelect}
                 >
-                  {baseCurrency.map((currency) => (
+                  {baseCurrency?.map((currency) => (
                     <option className="optionIterms" value={baseCurrency.code}>
                       {currency.code}
                     </option>
