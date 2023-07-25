@@ -29,6 +29,9 @@ const ConvertCurr = () => {
 
   // get amout from the input
   const handleInputChange = (e) => {
+    if (amount < 0) {
+      alert("input a valid figue");
+    }
     setAmount(e.target.value);
     console.log("Amount: ", amount);
     currencyConvert();
@@ -41,7 +44,7 @@ const ConvertCurr = () => {
 
   return (
     <div className="mainSection">
-      <h1>convert</h1>
+      <h1>currency exchange</h1>
       <div className="selectSection">
         <select onChange={selectCurrencyFrom}>
           {currencies?.map((currency, key) => (

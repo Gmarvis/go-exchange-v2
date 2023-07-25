@@ -4,7 +4,7 @@
   margin: 5rem auto;
   padding: 20px 10px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
   color: #04543e;
   height: 10rem;
 }
@@ -42,4 +42,54 @@
 .converted {
   height: auto;
   margin: auto 0;
+}
+
+@media screen and (max-width: 770px) {
+  .mainSection {
+    width: 95%;
+    height: auto;
+  }
+
+  .mainSection h1 {
+    text-align: center;
+  }
+  .selectSection {
+    display: block;
+    /* background-color: red; */
+    height: auto;
+    margin: auto;
+  }
+  .selectSection select {
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+  }
+
+  .selectSection h2 {
+    text-align: center;
+  }
+
+  .convertSection {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .convertSection input {
+    width: 50%;
+  }
+
+  .converted {
+    font-size: 15px;
+    width: 50%;
+    text-align: end;
+  }
+
+  .convertSection h2 {
+    font-size: 15px;
+  }
+
+  .converted h2 {
+    font-size: 15px;
+  }
 }
