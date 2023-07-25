@@ -6,6 +6,7 @@ const CurrencyRow = (props) => {
     selectedCurency,
     onChangeCurrency,
     amount,
+    
     onchangeAmount,
   } = props;
   return (

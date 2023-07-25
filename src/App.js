@@ -19,8 +19,6 @@ const baseUrl =
 function App() {
   const [currencies, setCurrencies] = useState(null);
   const [baseCurrency, setBaseCurrency] = useState([]);
-  const [convertData, setConvertData] = useState([]);
-  const [currencyOptions, setCurrencyOPtions] = useState([]);
 
   const [exchangeRate, setExchangeRate] = useState();
 
@@ -30,33 +28,24 @@ function App() {
     });
   };
 
-  const fetchConvertApi = () => {
-    axios.get(apiUrl).then((res) => {
-      setConvertData(res.data);
-      setCurrencyOPtions([res.data.base, ...Object.keys(res.data.rates)]);
-      console.log("base currency: ", res.data.base);
-    });
-  };
-  // console.log("currency options", currencyOptions);
-
-  // console.log("this is convert rates data", convertData);
+  // console.log("base currencies", baseCurrency);
 
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
-      setCurrencies(response.data);
+      let currencyArrar = Object.values(response.data.data).map(
+        (currencies) => currencies
+      );
+      setCurrencies(currencyArrar);
       updateBaseCurrency(response.data.data);
-      fetchConvertApi();
+      // fetchConvertApi();
     });
   }, []);
-
   return (
     <div>
       <CurrencyContext.Provider
         value={{
           currencies,
           baseCurrency,
-          convertData,
-          currencyOptions,
         }}
       >
         <Navbar />

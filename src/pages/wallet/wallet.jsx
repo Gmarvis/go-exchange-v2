@@ -6,6 +6,7 @@ import { PopUp } from "../../components/popups/popUp";
 import { FundsDeposit } from "../../components/cards";
 import { getLocalStorage } from "../../service/tools";
 import CurrencyConverter from "../../components/conveter/conveter";
+import ConvertCurr from "../../components/currencyConvert/convertCurr";
 
 export const Wallet = (props) => {
   const { baseCurrency } = useContext(CurrencyContext);
@@ -80,15 +81,19 @@ export const Wallet = (props) => {
             </div>
 
             <div className="selectCurrency">
-              <label htmlFor="currency">
+              <label>
                 {/* select currency */}
                 <select
                   name="selectedCurrency"
                   value={selected}
                   onChange={handleSelect}
                 >
-                  {baseCurrency?.map((currency) => (
-                    <option className="optionIterms" value={baseCurrency.code}>
+                  {baseCurrency?.map((currency, key) => (
+                    <option
+                      className="optionIterms"
+                      key={key}
+                      value={baseCurrency.code}
+                    >
                       {currency.code}
                     </option>
                   ))}
@@ -102,7 +107,8 @@ export const Wallet = (props) => {
           <h2 className="text-center">wallet Name: {walletName}</h2>
           <FundsDeposit />
         </div>
-        <CurrencyConverter />
+        {/* <CurrencyConverter /> */}
+        <ConvertCurr />
       </div>
     </>
   );

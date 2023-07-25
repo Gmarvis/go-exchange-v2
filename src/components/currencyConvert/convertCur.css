@@ -1,0 +1,45 @@
+.mainSection {
+  border: 1px solid #fff;
+  width: 60%;
+  margin: 5rem auto;
+  padding: 20px 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #04543e;
+  height: 10rem;
+}
+
+.selectSection {
+  display: flex;
+  /* background-color: red; */
+  height: auto;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.selectSection select {
+  background-color: #fff;
+  color: #000;
+  width: 12rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.convertSection {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.convertSection input {
+  border: 1px solid #04543e;
+  outline: none;
+  height: 2rem;
+  width: 12rem;
+  padding: 3px;
+}
+
+.converted {
+  height: auto;
+  margin: auto 0;
+}

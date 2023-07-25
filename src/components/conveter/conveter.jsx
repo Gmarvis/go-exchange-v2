@@ -16,13 +16,30 @@ const CurrencyConverter = () => {
   const [amountInFromCurency, setAmountInFromCurency] = useState(true);
   const [convertData, setConvertData] = useState([]);
   const [currencyOptions, setCurrencyOPtions] = useState([]);
+  // this is the states to be used for convertion
+  const [currencyTo, setCurrencyTo] = useState();
+  const [currencyFrom, setCurencyFrom] = useState();
 
-  console.clear();
-  console.log("this is the convert data", convertData);
+  console.log("this is the convert data", [convertData.rates]);
 
+  const arr = [];
+  arr.push(convertData.rates);
+  // Object.values();
+  // console.clear();
+  // console.log("this is our new array", arr);
   // setting the amount
 
   // handle currency
+
+  const exChangeCurreny = () => {};
+
+  const choosenCurrency = (e) => {
+    if (amountInFromCurency) {
+      setFromCurrency(e.target.value);
+    } else {
+      setFromCurrency(e.target.value);
+    }
+  };
 
   let toAmount, fromAmount;
   if (amountInFromCurency) {
@@ -62,7 +79,7 @@ const CurrencyConverter = () => {
     setAmountInFromCurency(false);
   };
 
-  console.log(`${apiUrl}?base=${fromCurrency}&symbols=${toCurrency}`);
+  // console.log(`${apiUrl}?base=${fromCurrency}&symbols=${toCurrency}`);
   // https://api.exchangeratesapi.io/v1/latest
   // ? access_key = API_KEY
   // & base = USD
@@ -85,7 +102,8 @@ const CurrencyConverter = () => {
         <CurrencyRow
           currencyOptions={currencyOptions}
           selectedCurency={fromCurrency}
-          onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+          // onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+          onChangeCurrency={(e) => choosenCurrency}
           amount={fromAmount}
           onchangeAmount={handleFromAmountChanged}
         />
@@ -93,7 +111,8 @@ const CurrencyConverter = () => {
         <CurrencyRow
           currencyOptions={currencyOptions}
           selectedCurency={toCurrency}
-          onChangeCurrency={(e) => setToCurrency(e.target.value)}
+          // onChangeCurrency={(e) => setToCurrency(e.target.value)}
+          onChangeCurrency={(e) => choosenCurrency}
           amount={toAmount}
           onchangeAmount={handleToAmontChange}
         />
