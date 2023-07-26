@@ -1,7 +1,8 @@
 .mainSection {
-  border: 1px solid #fff;
+  margin-top: 2rem;
   width: 60%;
-  margin: 5rem auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px 10px;
   background-color: #fff;
   border-radius: 5px;
@@ -46,8 +47,9 @@
 
 @media screen and (max-width: 770px) {
   .mainSection {
-    width: 95%;
+    width: 100%;
     height: auto;
+    /* margin-bottom: 30rem; */
   }
 
   .mainSection h1 {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./convertCur.css";
 import { CurrencyContext } from "../../utils/context";
 
@@ -14,7 +14,6 @@ const ConvertCurr = () => {
     let selected = e.target.value;
     let value = currencies?.find((curr) => curr.code === selected);
     setCurrencyFrom(value);
-    currencyConvert();
 
     console.clear();
     console.log("currency from: ", currencyFrom);
@@ -23,24 +22,31 @@ const ConvertCurr = () => {
   const selectCurrencyTO = (e) => {
     let value = currencies?.find((curr) => curr.code === e.target.value);
     setCurrencyTo(value);
-    currencyConvert();
     console.log("currency to: ", currencyTo);
   };
 
   // get amout from the input
   const handleInputChange = (e) => {
-    if (amount < 0) {
-      alert("input a valid figue");
-    }
-    setAmount(e.target.value);
-    console.log("Amount: ", amount);
-    currencyConvert();
+    setAmount(+e.target.value);
+    console.log("Amount: ", amount, e.target.value);
   };
 
   const currencyConvert = () => {
     let result = (amount / currencyFrom?.value) * currencyTo?.value;
     setConvertedAmount(result.toFixed(3));
   };
+
+  // const setIntail = () => {
+  //   let fistVal = currencies?.find((curr) => curr.code === "USD");
+  //   let secondVal = currencies?.find((curr) => curr === "XAF");
+  //   selectCurrencyFrom(fistVal);
+  //   setCurrencyTo(secondVal);
+  // };
+
+  useEffect(() => {
+    // setIntail();
+    if (amount >= 0 && currencyTo && currencyFrom) currencyConvert();
+  }, [amount, currencyTo, currencyFrom]);
 
   return (
     <div className="mainSection">
@@ -68,6 +74,7 @@ const ConvertCurr = () => {
           <input
             type="number"
             placeholder="Enter Amount"
+            defaultValue={0}
             onChange={handleInputChange}
           />
         </div>

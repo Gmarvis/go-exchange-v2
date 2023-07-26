@@ -109,6 +109,7 @@ export const Wallet = (props) => {
         </div>
         {/* <CurrencyConverter /> */}
         <ConvertCurr />
+        <br />
       </div>
     </>
   );
