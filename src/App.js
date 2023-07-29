@@ -31,14 +31,19 @@ function App() {
   // console.log("base currencies", baseCurrency);
 
   useEffect(() => {
-    axios.get(baseUrl).then((response) => {
-      let currencyArrar = Object.values(response.data.data).map(
-        (currencies) => currencies
-      );
-      setCurrencies(currencyArrar);
-      updateBaseCurrency(response.data.data);
-      // fetchConvertApi();
-    });
+    axios
+      .get(baseUrl)
+      .then((response) => {
+        let currencyArrar = Object.values(response.data.data).map(
+          (currencies) => currencies
+        );
+        setCurrencies(currencyArrar);
+        updateBaseCurrency(response.data.data);
+        // fetchConvertApi();
+      })
+      .catch((error) => {
+        alert("An error occured: ", error.message);
+      });
   }, []);
   return (
     <div>
