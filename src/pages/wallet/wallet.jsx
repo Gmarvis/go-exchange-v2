@@ -140,7 +140,7 @@ export const Wallet = (props) => {
       setTotalFunds(0);
       return;
     } else balance();
-  }, [selected]);
+  }, [selected, walletFunds]);
 
   return (
     <>
