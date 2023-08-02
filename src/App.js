@@ -10,17 +10,17 @@ import Navbar from "./components/nav/navbar";
 
 // const baseUrl = "https://api.currencyapi.com/v3/latest?apikey=yxwOCSE37Lu64dfvxhbaSrh8SduHenuI2FFeBArJ";
 
-const apiUrl =
-  "https://openexchangerates.org/api/latest.json?app_id=949d70acfb614d038b58da49e9502a65";
+// const apiUrl =
+//   "https://openexchangerates.org/api/latest.json?app_id=949d70acfb614d038b58da49e9502a65";
 
 const baseUrl =
-  "https://api.currencyapi.com/v3/latest?apikey=wm4xHyrV22ukG8i7AewRIN6Fpke3yCDwxwaLbQel";
+  "https://api.currencyapi.com/v3/latest?apikey=cur_live_0WsO46CCmcsui5n38T3pZCvdDkiYLHtnfKiiG0LP";
 
 function App() {
   const [currencies, setCurrencies] = useState(null);
   const [baseCurrency, setBaseCurrency] = useState([]);
 
-  const [exchangeRate, setExchangeRate] = useState();
+  // const [exchangeRate, setExchangeRate] = useState();
 
   const updateBaseCurrency = (data) => {
     ["USD", "EUR", "XAF"].forEach((cur) => {

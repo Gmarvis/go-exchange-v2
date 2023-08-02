@@ -15,6 +15,10 @@ export const DepositForm = (props) => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    if (e.target.value < 0) {
+      alert("Bad transaction! you can't deposit a nagetive amount to wallet");
+      return;
+    }
     const { name, value } = e.target;
     setDeposit((prevDeposit) => ({
       ...prevDeposit,
@@ -24,6 +28,10 @@ export const DepositForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (e.target.value < 0) {
+      alert("Bad transaction! you can't deposit a nagetive amount to wallet");
+      return;
+    }
     const prev = getLocalStorage("amountDeposit") || [
       {
         amount: 0,

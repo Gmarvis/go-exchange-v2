@@ -9,7 +9,7 @@ export const FundsDeposit = () => {
   const { baseCurrency } = useContext(CurrencyContext);
   const [showPopUp, setShowPopUp] = useState(false);
   const [popupdata, setPopupData] = useState();
-  const [slotAmount, setSlotAmount] = useState();
+  // const [slotAmount, setSlotAmount] = useState();
   const [convert, setConvert] = useState({
     amount: 0,
     currencyType: "USD",
@@ -34,7 +34,7 @@ export const FundsDeposit = () => {
 
   /* ---------converion logic starts here--------- */
   const convertAmmount = (OjbFrom, ObjTo) => {
-    setSlotAmount(OjbFrom.amount);
+    // setSlotAmount(OjbFrom.amount);
 
     const rateF = baseCurrency.find(
       (currObj) => currObj.code === OjbFrom.currencyType
@@ -50,7 +50,7 @@ export const FundsDeposit = () => {
 
     // const result = convert.amount * rateTo;
 
-    return result.toFixed(3);
+    return result;
   };
 
   /* ----------------convertion logic ends here----------------- */
@@ -88,7 +88,7 @@ export const FundsDeposit = () => {
     <div>
       <div className="cards">
         {walletFunds?.map((funds, index) => (
-          <div className="walletCards">
+          <div className="walletCards" key={index}>
             <div className="coin">
               <GiTwoCoins />
             </div>

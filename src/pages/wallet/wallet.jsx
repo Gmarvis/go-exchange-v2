@@ -5,7 +5,7 @@ import { DepositForm } from "../../components/handleExchange/deposit";
 import { PopUp } from "../../components/popups/popUp";
 import { FundsDeposit } from "../../components/cards";
 import { getLocalStorage } from "../../service/tools";
-import CurrencyConverter from "../../components/conveter/conveter";
+// import CurrencyConverter from "../../components/conveter/conveter";
 import ConvertCurr from "../../components/currencyConvert/convertCurr";
 
 export const Wallet = (props) => {
@@ -22,21 +22,7 @@ export const Wallet = (props) => {
 
   // handle wallet's total balance
   const balance = () => {
-    // let amountTo = walletFunds.find((cur) => cur.currencyType === selected);
-    // amountTo = amountTo.amount;
-    // console.log("this is amount to: ", amountTo);
-
-    // let amountFrom = walletFunds.filter(
-    //   (curr) => curr.currencyType !== selected
-    // );
-
-    // let valuesFrom = baseCurrency.filter(
-    //   (cur) => cur.code === amountFrom.currencyType
-    // );
-
-    // console.log("this is amounts form value: ", valuesFrom);
-
-    if (walletFunds === undefined || baseCurrency === undefined) {
+    if (!walletFunds || baseCurrency.length <= 0) {
       setTotalFunds(0);
       return;
     }
@@ -58,7 +44,7 @@ export const Wallet = (props) => {
       (curr) => curr.currencyType === "USD"
     ).amount;
     let valueInUSD = baseCurrency.find((curr) => curr.code === "USD").value;
-    let equvelentAMTinUSD = amountInUSD / valueInUSD;
+    // let equvelentAMTinUSD = amountInUSD / valueInUSD;
 
     if (selected === "USD") {
       let walletTotal =
@@ -71,7 +57,7 @@ export const Wallet = (props) => {
 
     if (selected === "EUR") {
       let walletTotal =
-        amountInXAF.amount + amountInUSD * valueInERU + amountInERu;
+        equvelentAMTinXAF + amountInUSD * valueInERU + amountInERu;
       setTotalFunds(walletTotal);
 
       console.log("this is tatal in EUR: ", walletTotal);
@@ -79,7 +65,8 @@ export const Wallet = (props) => {
 
     if (selected === "XAF") {
       let walletTotal =
-        amountInERu + amountInUSD * valueInXAF.value + amountInXAF.amount;
+        equvelentAMTinEUR + amountInUSD * valueInXAF + amountInXAF.amount;
+      // amountInERu + amountInUSD * valueInXAF.value + amountInXAF.amount;
       setTotalFunds(walletTotal);
 
       console.log("this is tatal in XAF: ", walletTotal);
@@ -131,12 +118,7 @@ export const Wallet = (props) => {
   };
 
   React.useEffect(() => {
-    if (
-      baseCurrency === null ||
-      baseCurrency === undefined ||
-      walletFunds === undefined ||
-      walletFunds === null
-    ) {
+    if (!baseCurrency || !walletFunds) {
       setTotalFunds(0);
       return;
     } else balance();
