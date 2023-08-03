@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./convertCur.css";
 import { CurrencyContext } from "../../utils/context";
+import GiSparrow from "react-icons/gi";
 
 const ConvertCurr = () => {
   const [amount, setAmount] = useState(0);
@@ -59,7 +60,11 @@ const ConvertCurr = () => {
             </option>
           ))}
         </select>
-        <h2>TO</h2>
+
+        <h2>
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        </h2>
+
         <select name="" id="" onChange={selectCurrencyTO}>
           {currencies?.map((currency, key) => (
             <option value={currency?.code} key={key}>

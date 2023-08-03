@@ -22,8 +22,8 @@
   background-color: #fff;
   color: #000;
   width: 12rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .convertSection {
@@ -33,7 +33,7 @@
 }
 
 .convertSection input {
-  border: 1px solid #04543e;
+  border: 2px solid #04543e;
   outline: none;
   height: 2rem;
   width: 12rem;
@@ -56,7 +56,7 @@
     text-align: center;
   }
   .selectSection {
-    display: block;
+    display: flex;
     /* background-color: red; */
     height: auto;
     margin: auto;
@@ -64,7 +64,8 @@
   .selectSection select {
     background-color: #fff;
     color: #000;
-    width: 100%;
+    width: 40%;
+    margin: 25px 0;
   }
 
   .selectSection h2 {

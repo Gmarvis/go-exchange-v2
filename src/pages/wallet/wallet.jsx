@@ -65,56 +65,10 @@ export const Wallet = (props) => {
 
     if (selected === "XAF") {
       let walletTotal =
-        equvelentAMTinEUR + amountInUSD * valueInXAF + amountInXAF.amount;
+        equvelentAMTinEUR + amountInUSD * valueInXAF.value + equvelentAMTinXAF;
       // amountInERu + amountInUSD * valueInXAF.value + amountInXAF.amount;
       setTotalFunds(walletTotal);
-
-      console.log("this is tatal in XAF: ", walletTotal);
     }
-
-    console.clear();
-    console.log("this is value in USD: ", valueInUSD);
-    console.log("amont in USD", amountInUSD);
-    console.log("this is equvelentAMTinEUR: ", equvelentAMTinEUR);
-
-    /*
-    // find base currency
-    let valTo = baseCurrency?.find((cur) => {
-      if (cur.code === selected) {
-        return cur?.value;
-      }
-      return cur?.value;
-    });
-    valTo = valTo?.value;
-
-    // values to be converted from
-    let valFrom = baseCurrency?.filter((curren) => curren.code !== selected);
-    const map = {};
-
-    valFrom.forEach(({ code, value }) => (map[`${code}`] = value));
-
-    // amoount to be converted to
-    let amountTo = walletFunds?.find((fund) => {
-      if (fund.currencyType === selected) {
-        return fund.amount;
-      }
-      // return fund.amount;
-    });
-    amountTo = amountTo?.amount;
-
-    // amount to be converted from
-    let amountsFrom = walletFunds?.filter(
-      (currency) => currency.currencyType !== selected
-    );
-
-    let results = 0;
-    amountsFrom?.forEach(({ amount, currencyType }) => {
-      results += amount / map[`${currencyType}`];
-    });
-    let total = results / valTo + amountTo;
-    // total = total.toFixed(2);
-    if (total) setTotalFunds(total);
-    */
   };
 
   React.useEffect(() => {
@@ -138,7 +92,7 @@ export const Wallet = (props) => {
             </PopUp>
             <div className="balance">
               <span>
-                {totalFunds} {selected}
+                {totalFunds.toFixed(5)} {selected}
               </span>
             </div>
 
@@ -166,7 +120,7 @@ export const Wallet = (props) => {
         </div>
 
         <div className="exchangeSection">
-          <h2 className="text-center">wallet Name: {walletName}</h2>
+          <h2 className="text-center">Name: {walletName}</h2>
           <FundsDeposit />
         </div>
         <ConvertCurr />

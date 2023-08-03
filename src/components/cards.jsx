@@ -94,7 +94,7 @@ export const FundsDeposit = () => {
             </div>
             <div className="funds">
               <h3>
-                {funds?.amount} {funds?.currencyType}
+                {funds?.amount} <span>{funds?.currencyType}</span>
               </h3>
               <button onClick={() => handleClick(funds)}>Transfer</button>
             </div>
@@ -130,8 +130,9 @@ export const FundsDeposit = () => {
                     defaultValue={convert.currencyType}
                     onChange={handleChange}
                   >
-                    {baseCurrency.map((currency) => (
+                    {baseCurrency.map((currency, index) => (
                       <option
+                        key={index}
                         className="optionIterms"
                         value={baseCurrency.code}
                       >
