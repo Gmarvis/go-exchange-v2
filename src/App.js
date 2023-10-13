@@ -8,12 +8,19 @@ import { CurrencyContext } from "./utils/context";
 // import { Navbar } from "./components/nav/navbar";
 import Navbar from "./components/nav/navbar";
 
+// const baseUrl = "https://api.currencyapi.com/v3/latest?apikey=yxwOCSE37Lu64dfvxhbaSrh8SduHenuI2FFeBArJ";
+
+// const apiUrl =
+//   "https://openexchangerates.org/api/latest.json?app_id=949d70acfb614d038b58da49e9502a65";
+
 const baseUrl =
-  "https://api.currencyapi.com/v3/latest?apikey=yxwOCSE37Lu64dfvxhbaSrh8SduHenuI2FFeBArJ";
+  "https://api.currencyapi.com/v3/latest?apikey=cur_live_0WsO46CCmcsui5n38T3pZCvdDkiYLHtnfKiiG0LP";
 
 function App() {
   const [currencies, setCurrencies] = useState(null);
   const [baseCurrency, setBaseCurrency] = useState([]);
+
+  // const [exchangeRate, setExchangeRate] = useState();
 
   const updateBaseCurrency = (data) => {
     ["USD", "EUR", "XAF"].forEach((cur) => {
@@ -21,18 +28,31 @@ function App() {
     });
   };
 
+  // console.log("base currencies", baseCurrency);
+
   useEffect(() => {
-    axios.get(baseUrl).then((response) => {
-      setCurrencies(response.data);
-      updateBaseCurrency(response.data.data);
-    });
+    axios
+      .get(baseUrl)
+      .then((response) => {
+        let currencyArrar = Object.values(response.data.data).map(
+          (currencies) => currencies
+        );
+        setCurrencies(currencyArrar);
+        updateBaseCurrency(response.data.data);
+        // fetchConvertApi();
+      })
+      .catch((error) => {
+        alert("An error occured: ", error.message);
+      });
   }, []);
-
-  // console.log("this is base cuurencies", baseCurrency);
-
   return (
     <div>
-      <CurrencyContext.Provider value={{ baseCurrency }}>
+      <CurrencyContext.Provider
+        value={{
+          currencies,
+          baseCurrency,
+        }}
+      >
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

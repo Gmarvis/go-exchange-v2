@@ -5,6 +5,8 @@ import { DepositForm } from "../../components/handleExchange/deposit";
 import { PopUp } from "../../components/popups/popUp";
 import { FundsDeposit } from "../../components/cards";
 import { getLocalStorage } from "../../service/tools";
+// import CurrencyConverter from "../../components/conveter/conveter";
+import ConvertCurr from "../../components/currencyConvert/convertCurr";
 
 export const Wallet = (props) => {
   const { baseCurrency } = useContext(CurrencyContext);
@@ -20,85 +22,110 @@ export const Wallet = (props) => {
 
   // handle wallet's total balance
   const balance = () => {
-    // find base currency
-    let valTo = baseCurrency?.find((cur) => {
-      if (cur.code === selected) {
-        return cur?.value;
-      }
-      // return cur?.value;
-    });
-    valTo = valTo?.value;
+    if (!walletFunds || baseCurrency.length <= 0) {
+      setTotalFunds(0);
+      return;
+    }
 
-    // values to be converted from
-    let valFrom = baseCurrency?.filter((curren) => curren.code !== selected);
-    const map = {};
-    valFrom.forEach(({ code, value }) => (map[`${code}`] = value));
+    /* AMount and valuue in EUR */
+    let amountInERu = walletFunds.find(
+      (cur) => cur.currencyType === "EUR"
+    ).amount;
+    let valueInERU = baseCurrency.find((cur) => cur.code === "EUR").value;
+    let equvelentAMTinEUR = amountInERu / valueInERU;
 
-    // amoount to be converted to
-    let amountTo = walletFunds?.find((fund) => {
-      if (fund.currencyType === selected) {
-        return fund.amount;
-      }
-      // return fund.amount;
-    });
-    amountTo = amountTo?.amount;
+    /* Amount and value in AXF */
+    let amountInXAF = walletFunds.find((cur) => cur.currencyType === "XAF");
+    let valueInXAF = baseCurrency.find((cur) => cur.code === "XAF");
+    let equvelentAMTinXAF = amountInXAF.amount / valueInXAF.value;
 
-    // amount to be converted from
-    let amountsFrom = walletFunds?.filter(
-      (currency) => currency.currencyType !== selected
-    );
+    /* Amount in USD */
+    let amountInUSD = walletFunds.find(
+      (curr) => curr.currencyType === "USD"
+    ).amount;
+    let valueInUSD = baseCurrency.find((curr) => curr.code === "USD").value;
+    // let equvelentAMTinUSD = amountInUSD / valueInUSD;
 
-    let results = 0;
-    amountsFrom?.forEach(({ amount, currencyType }) => {
-      results += amount / map[`${currencyType}`];
-    });
-    let total = results / valTo + amountTo;
-    if (total) setTotalFunds(total);
+    if (selected === "USD") {
+      let walletTotal =
+        equvelentAMTinXAF + equvelentAMTinEUR * valueInUSD + amountInUSD;
+
+      setTotalFunds(walletTotal);
+
+      console.log("this talal in USD: ", walletTotal);
+    }
+
+    if (selected === "EUR") {
+      let walletTotal =
+        equvelentAMTinXAF + amountInUSD * valueInERU + amountInERu;
+      setTotalFunds(walletTotal);
+
+      console.log("this is tatal in EUR: ", walletTotal);
+    }
+
+    if (selected === "XAF") {
+      let walletTotal =
+        equvelentAMTinEUR + amountInUSD * valueInXAF.value + equvelentAMTinXAF;
+      // amountInERu + amountInUSD * valueInXAF.value + amountInXAF.amount;
+      setTotalFunds(walletTotal);
+    }
   };
+
   React.useEffect(() => {
-    balance();
-  });
+    if (!baseCurrency || !walletFunds) {
+      setTotalFunds(0);
+      return;
+    } else balance();
+  }, [selected, walletFunds]);
 
   return (
-    <div className="wallet">
-      <div className="walletContainer">
-        <div className="header">
-          <button onClick={() => setShowPopUp(true)} className="depositeBtn">
-            Deposit
-          </button>
+    <>
+      <div className="wallet">
+        <div className="walletContainer">
+          <div className="header">
+            <button onClick={() => setShowPopUp(true)} className="depositeBtn">
+              Deposit
+            </button>
 
-          <PopUp trigger={showPopUp} setTrigger={setShowPopUp}>
-            <DepositForm setShowPopUp={setShowPopUp} />
-          </PopUp>
-          <div className="balance">
-            <span>
-              {totalFunds} {selected}
-            </span>
-          </div>
+            <PopUp trigger={showPopUp} setTrigger={setShowPopUp}>
+              <DepositForm setShowPopUp={setShowPopUp} />
+            </PopUp>
+            <div className="balance">
+              <span>
+                {totalFunds.toFixed(5)} {selected}
+              </span>
+            </div>
 
-          <div className="selectCurrency">
-            <label htmlFor="currency">
-              {/* select currency */}
-              <select
-                name="selectedCurrency"
-                value={selected}
-                onChange={handleSelect}
-              >
-                {baseCurrency.map((currency) => (
-                  <option className="optionIterms" value={baseCurrency.code}>
-                    {currency.code}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="selectCurrency">
+              <label>
+                {/* select currency */}
+                <select
+                  name="selectedCurrency"
+                  value={selected}
+                  onChange={handleSelect}
+                >
+                  {baseCurrency?.map((currency, key) => (
+                    <option
+                      className="optionIterms"
+                      key={key}
+                      value={baseCurrency.code}
+                    >
+                      {currency.code}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="exchangeSection">
-        <h2 className="text-center">wallet Name: {walletName}</h2>
-        <FundsDeposit />
+        <div className="exchangeSection">
+          <h2 className="text-center">Name: {walletName}</h2>
+          <FundsDeposit />
+        </div>
+        <ConvertCurr />
+        <br />
       </div>
-    </div>
+    </>
   );
 };

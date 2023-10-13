@@ -1,0 +1,98 @@
+.mainSection {
+  margin-top: 2rem;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #04543e;
+  height: 10rem;
+}
+
+.selectSection {
+  display: flex;
+  /* background-color: red; */
+  height: auto;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.selectSection select {
+  background-color: #fff;
+  color: #000;
+  width: 12rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.convertSection {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.convertSection input {
+  border: 1px solid #04543e;
+  outline: none;
+  height: 2rem;
+  width: 12rem;
+  padding: 3px;
+}
+
+.converted {
+  height: auto;
+  margin: auto 0;
+}
+
+@media screen and (max-width: 770px) {
+  .mainSection {
+    width: 100%;
+    height: auto;
+    /* margin-bottom: 30rem; */
+  }
+
+  .mainSection h1 {
+    text-align: center;
+  }
+  .selectSection {
+    display: flex;
+    /* background-color: red; */
+    height: auto;
+    margin: auto;
+  }
+  .selectSection select {
+    background-color: #fff;
+    color: #000;
+    width: 40%;
+    margin: 25px 0;
+  }
+
+  .selectSection h2 {
+    text-align: center;
+  }
+
+  .convertSection {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .convertSection input {
+    width: 50%;
+  }
+
+  .converted {
+    font-size: 15px;
+    width: 50%;
+    text-align: end;
+  }
+
+  .convertSection h2 {
+    font-size: 15px;
+  }
+
+  .converted h2 {
+    font-size: 15px;
+  }
+}
