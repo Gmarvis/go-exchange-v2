@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./popUp.css";
 import { AiOutlineClose } from "react-icons/ai";
 

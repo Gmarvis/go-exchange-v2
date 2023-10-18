@@ -12,7 +12,6 @@
 
 .selectSection {
   display: flex;
-  /* background-color: red; */
   height: auto;
   margin: auto;
   justify-content: space-between;

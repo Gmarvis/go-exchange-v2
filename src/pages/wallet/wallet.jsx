@@ -7,6 +7,7 @@ import { FundsDeposit } from "../../components/cards";
 import { getLocalStorage } from "../../service/tools";
 // import CurrencyConverter from "../../components/conveter/conveter";
 import ConvertCurr from "../../components/currencyConvert/convertCurr";
+import { useNavigate } from "react-router-dom";
 
 export const Wallet = (props) => {
   const { baseCurrency } = useContext(CurrencyContext);
@@ -15,6 +16,13 @@ export const Wallet = (props) => {
   const walletName = localStorage.getItem("user");
   const walletFunds = getLocalStorage("amountDeposit");
   const [totalFunds, setTotalFunds] = useState(0);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!walletName) {
+      navigate("/");
+    }
+  }, [navigate, walletName]);
 
   const handleSelect = (e) => {
     setSelected(e.target.value);
