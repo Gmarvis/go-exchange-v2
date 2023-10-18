@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./convertCur.css";
 import { CurrencyContext } from "../../utils/context";
-import GiSparrow from "react-icons/gi";
+// import GiSparrow from "react-icons/gi";
 
 const ConvertCurr = () => {
   const [amount, setAmount] = useState(0);
@@ -36,13 +36,6 @@ const ConvertCurr = () => {
     let result = (amount / currencyFrom?.value) * currencyTo?.value;
     setConvertedAmount(result.toFixed(3));
   };
-
-  // const setIntail = () => {
-  //   let fistVal = currencies?.find((curr) => curr.code === "USD");
-  //   let secondVal = currencies?.find((curr) => curr === "XAF");
-  //   selectCurrencyFrom(fistVal);
-  //   setCurrencyTo(secondVal);
-  // };
 
   useEffect(() => {
     // setIntail();
